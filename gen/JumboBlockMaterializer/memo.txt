@@ -1,0 +1,193 @@
+campfire_log_lit 16*64
+exposed_copper_lantern 16*48
+fire_0 16*512
+fire_1 16*512
+acacia_shelf: 32*32
+bamboo_shelf: 32*32
+birch_shelf: 32*32
+blast_furnace_front_on: 16*32
+campfire_fire: 16*128
+chain_command_block_back: 16*64
+chain_command_block_conditional: 16*64
+chain_command_block_front: 16*64
+chain_command_block_side: 16*64
+cherry_shelf: 32*32
+command_block_back: 16*64
+command_block_conditional: 16*64
+command_block_front: 16*64
+command_block_side: 16*64
+copper_lantern: 16*48
+crimson_shelf: 32*32
+crimson_stem: 16*80
+dark_oak_shelf: 32*32
+dried_ghast_hydration_0_tentacles: 32*32
+dried_ghast_hydration_1_tentacles: 32*32
+dried_ghast_hydration_2_tentacles: 32*32
+dried_ghast_hydration_3_tentacles: 32*32
+firefly_bush_emissive: 16*160
+jungle_shelf: 32*32
+kelp: 16*320
+kelp_plant: 16*320
+lantern: 16*48
+lava_flow: 32*512
+lava_still: 16*320
+magma: 16*48
+mangrove_shelf: 32*32
+nether_portal: 16*512
+oak_shelf: 32*32
+oxidized_copper_lantern: 16*48
+pale_oak_shelf: 32*32
+prismarine: 16*64
+repeating_command_block_back: 16*64
+repeating_command_block_conditional: 16*64
+repeating_command_block_front: 16*64
+repeating_command_block_side: 16*64
+respawn_anchor_top: 16*512
+sculk: 16*64
+sculk_catalyst_side_bloom: 16*128
+sculk_catalyst_top_bloom: 16*128
+sculk_sensor_tendril_active: 16*256
+sculk_sensor_tendril_inactive: 16*256
+sculk_shrieker_can_summon_inner_top: 16*160
+sculk_shrieker_inner_top: 16*160
+sculk_vein: 16*64
+seagrass: 16*288
+sea_lantern: 16*80
+smoker_front_on: 16*48
+soul_campfire_fire: 16*128
+soul_campfire_log_lit: 16*64
+soul_fire_0: 16*512
+soul_fire_1: 16*512
+soul_lantern: 16*48
+spruce_shelf: 32*32
+stonecutter_saw: 16*48
+tall_seagrass_bottom: 16*304
+tall_seagrass_top: 16*304
+warped_shelf: 32*32
+warped_stem: 16*80
+water_flow: 32*1024
+water_still: 16*512
+weathered_copper_lantern: 16*48
+
+修正必要
+blackstoneから
+diorite...pale_oak_planks, stone, smooth_stone, polished_diorite, sea_lantern
+
+glass, stained_glass, ice
+
+dried_kelp_block
+
+birch_log_top: suspicious!
+birch_planks: suspicious!
+chiseled_sandstone: suspicious!
+cobbled_deepslate: suspicious!
+cut_sandstone: suspicious!
+diorite: suspicious!
+end_stone: suspicious!
+exposed_copper_bulb_lit: suspicious!
+exposed_copper_bulb_lit_powered: suspicious!
+sandstone: suspicious!
+sandstone_bottom: suspicious!
+sandstone_top: suspicious!
+stripped_birch_log: suspicious!
+stripped_birch_log_top: suspicious!
+
+brain_coral_block: magenta!
+bubble_coral: magenta!
+bubble_coral_block: magenta!
+bubble_coral_fan: magenta!
+magenta_candle: magenta!
+magenta_candle_lit: magenta!
+magenta_concrete: magenta!
+magenta_concrete_powder: magenta!
+magenta_glazed_terracotta: magenta!
+magenta_shulker_box: magenta!
+magenta_wool: magenta!
+purple_candle_lit: magenta!
+spore_blossom: magenta!
+
+
+dried_kelp_block
+cartography_table_side1: replaced!
+cartography_table_side2: replaced!
+cartography_table_top: replaced!
+dried_kelp_bottom: replaced!
+dried_kelp_side: replaced!
+dried_kelp_top: replaced!
+//jukebox_side: replaced!
+//jukebox_top: replaced!
+//note_block: replaced!
+
+
+coal block
+acacia_log: coral block!
+andesite: coral block!
+basalt_top: coral block!
+blast_furnace_front: coral block!
+blast_furnace_front_on: coral block!
+blast_furnace_side: coral block!
+blast_furnace_top: coral block!
+cartography_table_top: coral block!
+chiseled_stone_bricks: coral block!
+chiseled_tuff: coral block!
+chiseled_tuff_bricks: coral block!
+chiseled_tuff_bricks_top: coral block!
+chiseled_tuff_top: coral block!
+coal_ore: coral block!
+copper_ore: coral block!
+cracked_stone_bricks: coral block!
+dead_brain_coral_block: coral block!
+dead_bubble_coral_block: coral block!
+dead_fire_coral_block: coral block!
+dead_horn_coral_block: coral block!
+dead_tube_coral_block: coral block!
+deepslate_top: coral block!
+diamond_ore: coral block!
+dispenser_front: coral block!
+dispenser_front_vertical: coral block!
+dried_kelp_bottom: coral block!
+dried_kelp_top: coral block!
+dropper_front: coral block!
+dropper_front_vertical: coral block!
+emerald_ore: coral block!
+furnace_front: coral block!
+furnace_front_on: coral block!
+furnace_side: coral block!
+furnace_top: coral block!
+gold_ore: coral block!
+iron_ore: coral block!
+lapis_ore: coral block!
+light_gray_wool: coral block!
+lodestone_side: coral block!
+mossy_stone_bricks: coral block!
+mycelium_side: coral block!
+mycelium_top: coral block!
+pale_oak_log: coral block!
+pale_oak_log_top: coral block!
+piston_bottom: coral block!
+piston_side: coral block!
+polished_andesite: coral block!
+polished_basalt_side: coral block!
+polished_basalt_top: coral block!
+polished_tuff: coral block!
+redstone_ore: coral block!
+reinforced_deepslate_bottom: coral block!
+reinforced_deepslate_side: coral block!
+reinforced_deepslate_top: coral block!
+sculk_catalyst_bottom: coral block!
+sculk_catalyst_side: coral block!
+sculk_catalyst_side_bloom: coral block!
+smoker_bottom: coral block!
+smoker_front: coral block!
+smoker_front_on: coral block!
+smoker_side: coral block!
+smoker_top: coral block!
+stone_bricks: coral block!
+tuff: coral block!
+tuff_bricks: coral block!
+weathered_chiseled_copper: coral block!
+weathered_copper: coral block!
+weathered_copper_bulb: coral block!
+weathered_copper_bulb_powered: coral block!
+weathered_copper_grate: coral block!
+weathered_cut_copper: coral block!
