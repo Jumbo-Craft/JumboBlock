@@ -1,0 +1,1 @@
+$setblock ~ ~ ~ structure_block{name:$(name),author:"jumbo_block",posX:1,posY:0,posZ:1,sizeX:16,sizeY:16,sizeZ:16,mode:"SAVE"}
