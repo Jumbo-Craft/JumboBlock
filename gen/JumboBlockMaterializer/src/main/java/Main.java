@@ -7,53 +7,59 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        createJumboTexture();
-        File[] files = new File("./jumbo_textures/").listFiles();
+        File[] files = new File("./input/jumbo_textures/").listFiles();
         assert files != null;
-        for (File f : files) {
-            //trim(f);
-            String filename = f.getName();
-            String name = filename.substring(0, filename.lastIndexOf('.'));
-            SimpleJson json = new SimpleJson(new File("./jumbo_textures/" + name + ".json"));
-            renderJumboTexture(json);
-            System.out.println(name);
-        }
+        recursive(files);
     }
 
-    public static void createJumboTexture() throws IOException {
-        File[] images = new File("./textures/").listFiles();
-        SimpleJson colorMap = new SimpleJson(new File("./color_map.json"));
-
-        assert images != null;
-        for (File img : images) {
-            String filename = img.getName();
-            String name = filename.substring(0, filename.lastIndexOf('.'));
-            SimpleJson jmbJson = new SimpleJson(new File("./jumbo_textures/" + name + ".json"));
-            List<String> pixelList = new ArrayList<>();
-            //boolean replaced = false;
-
-            BufferedImage bi = ImageIO.read(img);
-            for (int i = 0; i < bi.getWidth(); i++) {
-                for (int j = 0; j < bi.getHeight(); j++) {
-                    String blockName = getClosestColorBlock(colorMap, bi.getRGB(i, j));
-                    pixelList.add(blockName);
-                    //replaced = replaced || blockName.equals("dead_brain_coral_block") || blockName.equals("dead_bubble_coral_block") || blockName.equals("dead_fire_coral_block") || blockName.equals("dead_horn_coral_block") || blockName.equals("dead_tube_coral_block");
-                }
+    static void recursive(File[] files) throws IOException {
+        for (File f : files) {
+            if (Files.isDirectory(f.toPath())) {
+                recursive(Objects.requireNonNull(f.listFiles()));
+                continue;
             }
 
-            jmbJson.put("components", pixelList);
-            jmbJson.save();
-            //if (replaced) System.out.println(name + ": coral block!");
+            /* ---recursive process here--- */
+            //createJumboTexture(f);
+            renderJumboTexture(new SimpleJson(f));
+            //trim(f);
         }
     }
 
-    public static String getClosestColorBlock(SimpleJson colorMap, int argb) {
+    static void createJumboTexture(File img) throws IOException {
+        SimpleJson colorMap = new SimpleJson(new File("./input/color_map.json"));
+
+        String filename = img.getName();
+        String name = filename.substring(0, filename.lastIndexOf('.'));
+
+        String dirPath = img.getPath().replace(".\\input\\textures\\", "").replace(filename, "");
+        dirPath = "./output/jumbo_textures/" + dirPath.replace("\\", "/");
+        new File(dirPath).mkdirs();
+
+        SimpleJson jmbJson = new SimpleJson(new File(String.format("%s/%s.json", dirPath, name)));
+        List<String> pixelList = new ArrayList<>();
+
+        BufferedImage bi = ImageIO.read(img);
+        for (int i = 0; i < bi.getWidth(); i++) {
+            for (int j = 0; j < bi.getHeight(); j++) {
+                String blockName = getClosestColorBlock(colorMap, bi.getRGB(i, j));
+                pixelList.add(blockName);
+            }
+        }
+
+        jmbJson.put("components", pixelList);
+        jmbJson.save();
+        System.out.println("saved: " + jmbJson.getFile().toPath());
+    }
+
+    static String getClosestColorBlock(SimpleJson colorMap, int argb) {
         int a = (argb >> 24) & 0xFF;
         int r1 = (argb >> 16) & 0xFF;
         int g1 = (argb >> 8) & 0xFF;
@@ -79,10 +85,15 @@ public class Main {
         return closestBlock;
     }
 
-    public static void renderJumboTexture(SimpleJson json) throws IOException {
+    static void renderJumboTexture(SimpleJson json) throws IOException {
         String filename = json.getFile().getName();
         String name = filename.substring(0, filename.lastIndexOf('.'));
-        File file = new File("./rendered_jumbo_block/" + name + ".mcfunction");
+        String dirPath = json.getFile().getPath().replace(".\\input\\jumbo_textures\\", "").replace(filename, "");
+        dirPath = "./output/rendered_jumbo_block/" + dirPath.replace("\\", "/");
+        new File(dirPath).mkdirs();
+
+        File file = new File(String.format("%s/%s.mcfunction", dirPath, name));
+
         List<Object> blockList = json.getList("components");
         FileWriter filewriter = new FileWriter(file);
         List<String> queue = new ArrayList<>();
@@ -97,9 +108,11 @@ public class Main {
         filewriter.write(cmd.replaceAll("\\r\\n|\\r|\\n", ""));
         filewriter.write("\nfunction builder:direction/direction_manager");
         filewriter.close();
+
+        System.out.println("saved: " + file.getPath());
     }
 
-    public static void trim(File file) throws IOException {
+    static void trim(File file) throws IOException {
         BufferedImage image = ImageIO.read(file);
 
         int w = image.getWidth();
