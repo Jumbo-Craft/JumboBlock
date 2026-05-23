@@ -28,13 +28,14 @@ def main():
 
                 x = 255.0 * (1.0 - temperature)
                 y = 255.0 * (1.0 - downfall * temperature)
- 
+
                 r,g,b,a = colormap.getpixel((int(x), int(y)))
                 output = apply_colors(Image.open(f'./input/block/{img}').convert('RGBA'), (r, g, b, a))
                 biome_name = os.path.splitext(biome)[0]
                 os.makedirs(f'./output/{biome_name}', exist_ok=True)
-                output.save(f'./output/{biome_name}/{img}')
-                print(f'saved: ./output/{biome_name}/{img}')
+                path = f'./output/{biome_name}/{img}'
+                output.save(path)
+                print(f'saved: {path}')
 
 
 def apply_colors(img, base_color):
