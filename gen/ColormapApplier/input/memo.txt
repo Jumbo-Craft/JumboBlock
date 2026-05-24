@@ -1,0 +1,26 @@
+birch_leaves, spruce_leaves have a unique colormap
+
+grass:
+badlands
+cherry_grove
+dark_forest
+eroded_badlands
+mangrove_swamp
+pale_garden
+swamp
+wooded_badlands
+
+foliage:
+badlands
+cherry_grove
+eroded_badlands
+mangrove_swamp
+pale_garden
+swamp
+wooded_badlands
+
+dry_foliage:
+dark_forest
+mangrove_swamp
+pale_garden
+swamp
