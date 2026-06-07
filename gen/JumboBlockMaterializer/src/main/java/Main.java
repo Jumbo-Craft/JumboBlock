@@ -14,7 +14,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        File[] files = new File("./input/jumbo_textures/").listFiles();
+        File[] files = new File("./input/textures/").listFiles();
         assert files != null;
         recursive(files);
     }
@@ -27,14 +27,23 @@ public class Main {
             }
 
             /* ---recursive process here--- */
-            //createJumboTexture(f);
-            renderJumboTexture(new SimpleJson(f));
+            createJumboTexture(f);
+            //renderJumboTexture(new SimpleJson(f));
             //trim(f);
         }
     }
 
+    static SimpleJson colorMap;
+
+    static {
+        try {
+            colorMap = new SimpleJson(new File("./input/color_map.json"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     static void createJumboTexture(File img) throws IOException {
-        SimpleJson colorMap = new SimpleJson(new File("./input/color_map.json"));
 
         String filename = img.getName();
         String name = filename.substring(0, filename.lastIndexOf('.'));

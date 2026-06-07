@@ -3,11 +3,11 @@ birch_leaves, spruce_leaves have a unique colormap
 grass:
 badlands
 cherry_grove
-dark_forest
+dark_forest<-----
 eroded_badlands
-mangrove_swamp
+mangrove_swamp<-----
 pale_garden
-swamp
+swamp<----
 wooded_badlands
 
 foliage:

@@ -1,5 +1,7 @@
 import json
 import os
+from asyncio.windows_events import NULL
+
 import numpy as np
 
 from PIL import Image
@@ -9,10 +11,10 @@ def main():
     apply_natural_color('grass')
     apply_natural_color('foliage')
     apply_natural_color('dry_foliage')
-    #apply_badlands()
-    #apply_swamp()
-    #apply_mangrove_swamp()
-    #apply_dark_forest()
+    apply_swamp_grass1()
+    apply_dark_forest_grass()
+    apply_birch_leaves()
+    apply_spruce_leaves()
 
 def apply_color(rgba, biome, group):
     r,g,b,a = rgba
@@ -53,19 +55,22 @@ def merge_grass_block_side(img, overlay):
                 img.putpixel((x, y), rgba)
     return img
 
-def apply_natural_color(group):
-    except_keys = {
+except_keys = {
         'grass': ['grass_color_modifier', 'grass_color'],
         'foliage': ['foliage_color_modifier', 'foliage_color'],
         'dry_foliage': ['dry_foliage_color'],
     }
+
+def apply_natural_color(group):
+    ex_keyset = set(except_keys[group])
     colormap = Image.open(f'./input/colormap/{group}.png').convert('RGBA')
 
     for biome in os.listdir('./input/biome'):
         json_open = open(f'./input/biome/{biome}', 'r')
         json_read = json.load(json_open)
+        biome_name = os.path.splitext(biome)[0]
 
-        if set(except_keys[group]).isdisjoint(json_read['effects']):
+        if ex_keyset.isdisjoint(json_read['effects']):
             temperature = json_read['temperature']
             downfall = json_read['downfall']
 
@@ -76,36 +81,48 @@ def apply_natural_color(group):
                 temperature = 0.0
 
             rgba = get_natural_color(temperature, downfall, colormap)
-            biome_name = os.path.splitext(biome)[0]
             apply_color(rgba, biome_name, group)
         else:
-            print(f'skipped: {biome} (group: {group})')
+            ex_key = (set(json_read['effects']) & ex_keyset).pop()
+            hex_code = json_read['effects'][ex_key]
 
-def apply_badlands(group):
-    hex_code = '90814d'
-    r,g,b = [int(hex_code[i:i + 2], 16) for i in range(0, 6, 2)]
-    apply_color((r,g,b,255), 'badlands', group)
+            if not hex_code.startswith('#'):
+                print(f'skipped: {biome_name} (group: {group})')
+                continue
 
-def apply_swamp(group):
-    hex_code = '6a7039'
-    r,g,b = [int(hex_code[i:i + 2], 16) for i in range(0, 6, 2)]
-    apply_color((r,g,b,255), 'swamp', group)
+            hex_code = hex_code.split('#')[1]
+            r, g, b = hex2rgb(hex_code)
+            apply_color((r,g,b,255), biome_name, group)
 
-def apply_mangrove_swamp(group):
-    hex_code = '6a7039'
-    r,g,b = [int(hex_code[i:i + 2], 16) for i in range(0, 6, 2)]
-    apply_color((r,g,b,255), 'mangrove_swamp', group)
+def hex2rgb(hex_code):
+    return [int(hex_code[i:i + 2], 16) for i in range(0, 6, 2)]
 
-def apply_dark_forest(group):
+def apply_birch_leaves():
+    r, g, b = hex2rgb('80a755')
+    apply_color((r,g,b,255), 'birch_leaves', 'birch_leaves')
+
+def apply_spruce_leaves():
+    r, g, b = hex2rgb('619961')
+    apply_color((r,g,b,255), 'spruce_leaves', 'spruce_leaves')
+
+def apply_swamp_grass1():
+    r, g, b = hex2rgb('4c763c')
+    apply_color((r,g,b,255), 'swamp', 'grass')
+
+def apply_swamp_grass2():
+    r, g, b = hex2rgb('6a7039')
+    apply_color((r,g,b,255), 'swamp', 'grass')
+
+def apply_dark_forest_grass():
     temperature = 0.7
     downfall = 0.8
+    colormap = Image.open(f'./input/colormap/grass.png').convert('RGBA')
 
-    hex_code = '28340a'
-    r1,g1,b1 = np.array([int(hex_code[i:i + 2], 16) for i in range(0, 6, 2)])
-    r2, g2, b2, a = get_natural_color(temperature, downfall)
+    r1, g1, b1 = hex2rgb('28340a')
+    r2, g2, b2, a = get_natural_color(temperature, downfall, colormap)
     rgba = ((r1 + r2) // 2, (g1 + g2) // 2, (b1 + b2) // 2, a)
 
-    apply_color(rgba, 'dark_forest', group)
+    apply_color(rgba, 'dark_forest', 'grass')
 
 
 if __name__ == '__main__':
